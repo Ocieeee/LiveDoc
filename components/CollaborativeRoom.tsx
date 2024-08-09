@@ -5,7 +5,7 @@ import { Editor } from '@/components/editor/Editor'
 import Header from '@/components/Header'
 import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
 import ActiveCollaborators from './ActiveCollaborators';
-import { useEffect, useRef, useState } from 'react';
+import { RefObject, useEffect, useRef, useState } from 'react';
 import { Input } from './ui/input';
 import Image from 'next/image';
 import { updateDocument } from '@/lib/actions/room.actions';
@@ -72,11 +72,12 @@ const CollaborativeRoom = ({ roomId, roomMetadata, users, currentUserType }: Col
                 <Input 
                   type="text"
                   value={documentTitle}
-                  ref={inputRef}
+                  /// <reference path="" />
+                  ref={inputRef as RefObject<HTMLInputElement>}
                   placeholder="Enter title"
                   onChange={(e) => setDocumentTitle(e.target.value)}
                   onKeyDown={updateTitleHandler}
-                  disable={!editing}
+                  disabled={!editing}
                   className="document-title-input"
                 />
               ) : (
